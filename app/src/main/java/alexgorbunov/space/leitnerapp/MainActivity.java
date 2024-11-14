@@ -14,10 +14,12 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import alexgorbunov.space.leitnerapp.databinding.ActivityMainBinding;
+import dagger.hilt.android.AndroidEntryPoint;
 
 import android.view.Menu;
 import android.view.MenuItem;
 
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;

@@ -1,9 +1,9 @@
 package alexgorbunov.space.leitnerapp.models;
 
 public class Card {
-    private int id;
-    private String question;
-    private String answer;
+    private final int id;
+    private final String question;
+    private final String answer;
     private CardBox cardBox;
 
     public Card(int id, String question, String answer, CardBox cardBox) {
@@ -11,6 +11,14 @@ public class Card {
         this.question = question;
         this.answer = answer;
         this.cardBox = cardBox;
+    }
+
+    public void setCardBox(CardBox cardBox) {
+        this.cardBox = cardBox;
+    }
+
+    public CardBox getCardBox() {
+        return cardBox;
     }
 
     public int getId() {
@@ -24,10 +32,4 @@ public class Card {
     public String getAnswer() {
         return answer;
     }
-
-    public CardBox getCardBox() {
-        return cardBox;
-    }
-
-
 }

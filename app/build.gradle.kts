@@ -1,3 +1,5 @@
+import org.gradle.internal.impldep.com.fasterxml.jackson.core.JsonPointer.compile
+
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.dagger.hilt.android")
@@ -47,4 +49,8 @@ dependencies {
 
     implementation(libs.hilt.android)
     annotationProcessor(libs.hilt.android.compiler.v244)
+
+    implementation(libs.jackson.core)
+    implementation(libs.jackson.annotations)
+    implementation(libs.jackson.databind)
 }
