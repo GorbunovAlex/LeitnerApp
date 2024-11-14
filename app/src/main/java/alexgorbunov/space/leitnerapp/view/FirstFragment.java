@@ -1,4 +1,4 @@
-package alexgorbunov.space.leitnerapp;
+package alexgorbunov.space.leitnerapp.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -31,7 +31,6 @@ public class FirstFragment extends Fragment {
 
         binding.buttonFirst.setOnClickListener(v ->
                 NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment)
         );
     }
 
