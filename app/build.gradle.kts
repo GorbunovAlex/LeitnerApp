@@ -43,6 +43,8 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+    implementation(libs.datastore.rxjava3)
+    implementation(libs.datastore.preferences.rxjava3)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -53,4 +55,6 @@ dependencies {
     implementation(libs.jackson.core)
     implementation(libs.jackson.annotations)
     implementation(libs.jackson.databind)
+
+    implementation(libs.datastore.preferences)
 }

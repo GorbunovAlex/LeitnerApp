@@ -1,11 +1,13 @@
 package alexgorbunov.space.leitnerapp;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -19,17 +21,38 @@ import dagger.hilt.android.AndroidEntryPoint;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.File;
+import java.io.IOException;
+
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
-
+    Context context;
     private AppBarConfiguration appBarConfiguration;
-    private ActivityMainBinding binding;
+
+    private void initAppStorage() {
+        try {
+            File cards_storage = new File(context.getFilesDir(), Consts.CARDS_STORE);
+            if (!cards_storage.exists()) {
+                boolean isCreated = cards_storage.createNewFile();
+                if (!isCreated) {
+                    throw new RuntimeException("Can't create cards storage");
+                } else {
+                    Log.i(Consts.MAIN_ACTIVITY_TAG, "Cards storage created");
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        this.context = getApplicationContext();
+        initAppStorage();
+
+        alexgorbunov.space.leitnerapp.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
