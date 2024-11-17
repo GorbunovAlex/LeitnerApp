@@ -2,11 +2,12 @@ package alexgorbunov.space.leitnerapp.models;
 
 import android.util.Log;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -48,19 +49,54 @@ public class Card {
         return answer;
     }
 
+//    public static ArrayList<Card> readCardsFromJson(String json) {
+//        try {
+//            List<String> raw_cards = objectMapper.readValue(json, List.class);
+//            Log.d(Consts.LOCAL_DATASOURCE_TAG, raw_cards.toString());
+//            ArrayList<Card> cards = raw_cards.stream().map(card -> {
+//                try {
+//                    return objectMapper.readValue(card, Card.class);
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }).collect(Collectors.toCollection(ArrayList::new));
+//            Log.d(Consts.LOCAL_DATASOURCE_TAG, cards.toString());
+//            return new ArrayList<>();
+//        } catch (IOException e) {
+//            Log.d(Consts.LOCAL_DATASOURCE_TAG, Objects.requireNonNull(e.getMessage()));
+//            return new ArrayList<>();
+//        }
+//    }
+
+    private static Card fromJson(LinkedHashMap<String, Object> map) {
+        Integer cardId = (Integer) map.get("id");
+        Integer cardBoxId = (Integer) map.get("cardBox");
+        Log.d(Consts.CARD_CLASS_TAG, "Card id: " + cardId + ", cardBoxId: " + cardBoxId);
+        if (cardId == null || cardBoxId == null) {
+            Log.e(Consts.CARD_CLASS_TAG, "Card id or cardBoxId is null");
+            return null;
+        }
+        return new Card(
+                cardId,
+                (String) map.get("question"),
+                (String) map.get("answer"),
+                cardBoxId
+        );
+    }
+
     public static ArrayList<Card> readCardsFromJson(String json) {
         try {
-            List<Card> cards = Collections.emptyList();
-            List<String> raw_cards = objectMapper.readValue(json, List.class);
-            raw_cards.stream().map(card -> {
+            List<LinkedHashMap<String, Object>> raw_cards = objectMapper.readValue(json, new TypeReference<List<LinkedHashMap<String, Object>>>() {});
+            Log.d(Consts.LOCAL_DATASOURCE_TAG, raw_cards.toString());
+            ArrayList<Card> cards = raw_cards.stream().map(card -> {
                 try {
-                    return objectMapper.readValue(card, Card.class);
-                } catch (IOException e) {
+                    return fromJson(card);
+                } catch (IllegalArgumentException e) {
                     throw new RuntimeException(e);
                 }
-            }).collect(Collectors.toList());
+            }).collect(Collectors.toCollection(ArrayList::new));
             Log.d(Consts.LOCAL_DATASOURCE_TAG, cards.toString());
-            return new ArrayList<>();
+            return cards;
         } catch (IOException e) {
             Log.d(Consts.LOCAL_DATASOURCE_TAG, Objects.requireNonNull(e.getMessage()));
             return new ArrayList<>();

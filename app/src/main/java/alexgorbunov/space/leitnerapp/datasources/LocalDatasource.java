@@ -42,6 +42,7 @@ public class LocalDatasource {
                 Log.d(Consts.LOCAL_DATASOURCE_TAG, Objects.requireNonNull(e.getMessage()));
                 return new ArrayList<>();
             }
+            Log.d(Consts.LOCAL_DATASOURCE_TAG, stringBuilder.toString());
             return Card.readCardsFromJson(stringBuilder.toString());
         } catch (IOException e) {
             Log.d(Consts.LOCAL_DATASOURCE_TAG, Objects.requireNonNull(e.getMessage()));
