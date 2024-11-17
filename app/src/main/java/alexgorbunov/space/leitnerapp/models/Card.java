@@ -49,25 +49,6 @@ public class Card {
         return answer;
     }
 
-//    public static ArrayList<Card> readCardsFromJson(String json) {
-//        try {
-//            List<String> raw_cards = objectMapper.readValue(json, List.class);
-//            Log.d(Consts.LOCAL_DATASOURCE_TAG, raw_cards.toString());
-//            ArrayList<Card> cards = raw_cards.stream().map(card -> {
-//                try {
-//                    return objectMapper.readValue(card, Card.class);
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }).collect(Collectors.toCollection(ArrayList::new));
-//            Log.d(Consts.LOCAL_DATASOURCE_TAG, cards.toString());
-//            return new ArrayList<>();
-//        } catch (IOException e) {
-//            Log.d(Consts.LOCAL_DATASOURCE_TAG, Objects.requireNonNull(e.getMessage()));
-//            return new ArrayList<>();
-//        }
-//    }
-
     private static Card fromJson(LinkedHashMap<String, Object> map) {
         Integer cardId = (Integer) map.get("id");
         Integer cardBoxId = (Integer) map.get("cardBox");
