@@ -16,12 +16,14 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import alexgorbunov.space.leitnerapp.databinding.ActivityMainBinding;
+import alexgorbunov.space.leitnerapp.view.FirstFragment;
 import dagger.hilt.android.AndroidEntryPoint;
 
 import android.view.Menu;
 import android.view.MenuItem;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 
 @AndroidEntryPoint
@@ -64,9 +66,7 @@ public class MainActivity extends AppCompatActivity {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .setAction("Action", null).show();
+                navController.navigate(R.id.FirstFragment);
             }
         });
     }

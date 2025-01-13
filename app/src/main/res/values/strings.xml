@@ -2,8 +2,10 @@
     <string name="app_name">LeitnerApp</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="add_card_view">Add Card</string>
+    <string name="cards_list_view">Cards List</string>
+    <string name="card_view">Card</string>
+
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="reveal">Reveal</string>
@@ -11,4 +13,5 @@
     <string name="enter_card_question">Enter card question</string>
     <string name="enter_card_answer">Enter card answer</string>
     <string name="add_card">Add card</string>
+    <string name="todo">TODO</string>
 </resources>

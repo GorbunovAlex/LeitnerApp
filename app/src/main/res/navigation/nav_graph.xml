@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/nav_graph"
+        app:startDestination="@id/CardsFragment">
+    <fragment
+            android:id="@+id/CardsFragment"
+            android:name="alexgorbunov.space.leitnerapp.view.CardsFragment"
+            android:label="@string/cards_list_view"
+            tools:layout="@layout/fragment_cards">
+        <action
+                android:id="@+id/action_CardsFragment_to_FirstFragment"
+                app:destination="@id/FirstFragment" />
+        <action
+                android:id="@+id/action_CardsFragment_to_CardFragment"
+                app:destination="@id/CardFragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="alexgorbunov.space.leitnerapp.view.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-    </fragment>
+            android:id="@+id/FirstFragment"
+            android:name="alexgorbunov.space.leitnerapp.view.FirstFragment"
+            android:label="@string/add_card_view"
+            tools:layout="@layout/fragment_first" />
+    <fragment
+            android:id="@+id/CardFragment"
+            android:name="alexgorbunov.space.leitnerapp.view.CardFragment"
+            android:label="@string/card_view"
+            tools:layout="@layout/fragment_card"/>
 </navigation>
