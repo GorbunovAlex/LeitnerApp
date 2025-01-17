@@ -2,6 +2,7 @@ package alexgorbunov.space.leitnerapp.view;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import java.util.List;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
+
+import javax.inject.Inject;
 
 import alexgorbunov.space.leitnerapp.R;
 import alexgorbunov.space.leitnerapp.databinding.FragmentCardsBinding;
@@ -21,22 +26,20 @@ import alexgorbunov.space.leitnerapp.view_model.CardsViewModel;
 
 public class CardsFragment extends Fragment {
     Context context;
+    Logger logger;
+
+    @Inject
     CardsViewModel cardsViewModel;
-    List<Card> cards;
     ListView cardsList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.context = requireActivity().getApplicationContext();
-        this.cardsViewModel = new CardsViewModel(this.context);
+        logger = Logger.getLogger(context.getPackageName());
     }
 
     private FragmentCardsBinding binding;
-
-    private void getCards() {
-        this.cards = cardsViewModel.getCards();
-    }
 
     @Override
     public View onCreateView(
@@ -50,14 +53,17 @@ public class CardsFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.getCards();
 
-        cardsList = cardsList.findViewById(R.id.cards_list);
+        cardsList = view.findViewById(R.id.cards_list);
         ArrayAdapter<String> arr;
+
+        List<Card> cards = cardsViewModel.getCards();
+
+        logger.info(Integer.toString(cards.size()));
 
         List<String> questions = cards.stream().map(Card::getQuestion).collect(Collectors.toList());
 
-        arr = new ArrayAdapter<String>(context, R.layout.fragment_cards, questions);
+        arr = new ArrayAdapter<String>(context, R.layout.card_list_item, questions);
         cardsList.setAdapter(arr);
     }
 

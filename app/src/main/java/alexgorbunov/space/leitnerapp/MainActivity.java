@@ -3,33 +3,35 @@ package alexgorbunov.space.leitnerapp;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
 import android.view.View;
 
+
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import alexgorbunov.space.leitnerapp.databinding.ActivityMainBinding;
-import alexgorbunov.space.leitnerapp.view.FirstFragment;
+import alexgorbunov.space.leitnerapp.view_model.CardsViewModel;
 import dagger.hilt.android.AndroidEntryPoint;
 
 import android.view.Menu;
 import android.view.MenuItem;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+
 
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
     Context context;
     private AppBarConfiguration appBarConfiguration;
+
+    CardsViewModel cardsViewModel;
 
     private void initAppStorage() {
         try {
@@ -52,16 +54,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         this.context = getApplicationContext();
-        initAppStorage();
+
+        cardsViewModel = new CardsViewModel(this.context);
 
         alexgorbunov.space.leitnerapp.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        NavHostFragment hostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
+        assert hostFragment != null;
+        NavController navController = hostFragment.getNavController();
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
+        initAppStorage();
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override

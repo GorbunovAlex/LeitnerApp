@@ -8,9 +8,10 @@ import java.util.ArrayList;
 
 import alexgorbunov.space.leitnerapp.models.Card;
 import alexgorbunov.space.leitnerapp.repositories.LocalRepository;
+import dagger.hilt.android.lifecycle.HiltViewModel;
 
 public class CardsViewModel extends ViewModel {
-    private LocalRepository repository;
+    private final LocalRepository repository;
     private ArrayList<Card> cardList = new ArrayList<>();
 
     public CardsViewModel(Context context) {
