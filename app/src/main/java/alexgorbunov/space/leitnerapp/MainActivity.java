@@ -16,22 +16,20 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import alexgorbunov.space.leitnerapp.databinding.ActivityMainBinding;
-import alexgorbunov.space.leitnerapp.view_model.CardsViewModel;
-import dagger.hilt.android.AndroidEntryPoint;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import dagger.hilt.android.AndroidEntryPoint;
 
 import java.io.File;
 import java.io.IOException;
 
-
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
-    Context context;
-    private AppBarConfiguration appBarConfiguration;
 
-    CardsViewModel cardsViewModel;
+    Context context;
+
+    private AppBarConfiguration appBarConfiguration;
 
     private void initAppStorage() {
         try {
@@ -54,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         this.context = getApplicationContext();
-
-        cardsViewModel = new CardsViewModel(this.context);
 
         alexgorbunov.space.leitnerapp.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

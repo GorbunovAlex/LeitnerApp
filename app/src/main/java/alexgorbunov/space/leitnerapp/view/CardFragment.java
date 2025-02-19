@@ -30,7 +30,9 @@ public class CardFragment extends Fragment {
     private FragmentCardBinding binding;
 
     private void getCards() {
-        this.cards = cardsViewModel.getCards();
+        cardsViewModel.getCards().observe(getViewLifecycleOwner(), cards -> {
+            this.cards = cards;
+        });
     }
 
     @Override
