@@ -14,4 +14,6 @@
     <string name="enter_card_answer">Enter card answer</string>
     <string name="add_card">Add card</string>
     <string name="todo">TODO</string>
+    <string name="delete_card">Delete Card</string>
+    <string name="edit_card">Edit card</string>
 </resources>

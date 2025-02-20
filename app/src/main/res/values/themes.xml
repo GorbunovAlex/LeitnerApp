@@ -1,9 +1,82 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.LeitnerApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Primary Colors -->
+        <item name="colorPrimary">@color/md_theme_light_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_light_onPrimaryContainer</item>
+
+        <!-- Secondary Colors -->
+        <item name="colorSecondary">@color/md_theme_light_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_light_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_light_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_light_onSecondaryContainer</item>
+
+        <!-- Tertiary Colors -->
+        <item name="colorTertiary">@color/md_theme_light_tertiary</item>
+        <item name="colorOnTertiary">@color/md_theme_light_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/md_theme_light_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/md_theme_light_onTertiaryContainer</item>
+
+        <!-- Error Colors -->
+        <item name="colorError">@color/md_theme_light_error</item>
+        <item name="colorOnError">@color/md_theme_light_onError</item>
+        <item name="colorErrorContainer">@color/md_theme_light_errorContainer</item>
+        <item name="colorOnErrorContainer">@color/md_theme_light_onErrorContainer</item>
+
+        <!-- Background & Surface -->
+        <item name="android:colorBackground">@color/md_theme_light_background</item>
+        <item name="colorOnBackground">@color/md_theme_light_onBackground</item>
+        <item name="colorSurface">@color/md_theme_light_surface</item>
+        <item name="colorOnSurface">@color/md_theme_light_onSurface</item>
+
+        <!-- Outline -->
+        <item name="colorOutline">@color/md_theme_light_outline</item>
+
+        <!-- Status Bar & Navigation Bar -->
+        <item name="android:statusBarColor">@color/md_theme_light_primary</item>
+        <item name="android:navigationBarColor">@color/md_theme_light_background</item>
     </style>
 
-    <style name="Theme.LeitnerApp" parent="Base.Theme.LeitnerApp" />
+    <style name="Theme.MyApp" parent="Theme.Material3.Dark">
+        <!-- Primary Colors -->
+        <item name="colorPrimary">#B2C7FF</item>
+        <item name="colorOnPrimary">#002764</item>
+        <item name="colorPrimaryContainer">#003A99</item>
+        <item name="colorOnPrimaryContainer">#D5E0FF</item>
+
+        <!-- Secondary Colors -->
+        <item name="colorSecondary">#BBC7E8</item>
+        <item name="colorOnSecondary">#1D293F</item>
+        <item name="colorSecondaryContainer">#384766</item>
+        <item name="colorOnSecondaryContainer">#D9E2FF</item>
+
+        <!-- Tertiary Colors -->
+        <item name="colorTertiary">#D6BEE3</item>
+        <item name="colorOnTertiary">#3B223F</item>
+        <item name="colorTertiaryContainer">#573F5B</item>
+        <item name="colorOnTertiaryContainer">#F2DAFF</item>
+
+        <!-- Error Colors -->
+        <item name="colorError">#FFB4A9</item>
+        <item name="colorOnError">#680003</item>
+        <item name="colorErrorContainer">#930006</item>
+        <item name="colorOnErrorContainer">#FFDAD6</item>
+
+        <!-- Background & Surface -->
+        <item name="android:colorBackground">#121212</item>
+        <item name="colorOnBackground">#E0E0E0</item>
+        <item name="colorSurface">#1E1E1E</item>
+        <item name="colorOnSurface">#F2F2F2</item>
+
+        <!-- Outline -->
+        <item name="colorOutline">#8E8E8E</item>
+
+        <!-- Status Bar & Navigation Bar -->
+        <item name="android:statusBarColor">#002764</item>
+        <item name="android:navigationBarColor">#121212</item>
+    </style>
+
+    <style name="Theme.LeitnerApp" parent="Base.Theme.LeitnerApp"/>
 </resources>

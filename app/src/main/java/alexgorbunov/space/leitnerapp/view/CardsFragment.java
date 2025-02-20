@@ -22,6 +22,7 @@ import alexgorbunov.space.leitnerapp.models.Card;
 import alexgorbunov.space.leitnerapp.view_model.CardsViewModel;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
@@ -32,6 +33,7 @@ public class CardsFragment extends Fragment {
     CardsViewModel cardsViewModel;
 
     ListView cardsList;
+    private ArrayList<Card> currentCards;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,9 +60,19 @@ public class CardsFragment extends Fragment {
 
         cardsList = view.findViewById(R.id.cards_list);
 
+        // Set up click listener
+        cardsList.setOnItemClickListener((parent, view1, position, id) -> {
+            Card selectedCard = currentCards.get(position);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("card", selectedCard);
+            Navigation.findNavController(view)
+                    .navigate(R.id.action_CardsFragment_to_CardFragment, bundle);
+        });
+
         cardsViewModel.getCards().observe(getViewLifecycleOwner(), new Observer<ArrayList<Card>>() {
             @Override
             public void onChanged(ArrayList<Card> cards) {
+                currentCards = cards;
                 logger.info(Integer.toString(cards.size()));
                 List<String> questions = cards.stream().map(Card::getQuestion).collect(Collectors.toList());
                 ArrayAdapter<String> arr = new ArrayAdapter<>(context, R.layout.card_list_item, questions);

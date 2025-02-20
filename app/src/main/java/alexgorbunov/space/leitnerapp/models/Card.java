@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 
 import alexgorbunov.space.leitnerapp.Consts;
 
-public class Card {
+public class Card implements Serializable {
     private final int id;
     private final String question;
     private final String answer;
