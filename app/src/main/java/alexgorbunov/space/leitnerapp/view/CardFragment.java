@@ -15,6 +15,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import alexgorbunov.space.leitnerapp.databinding.FragmentCardBinding;
 import alexgorbunov.space.leitnerapp.models.Card;
@@ -23,8 +24,8 @@ import androidx.navigation.Navigation;
 
 public class CardFragment extends Fragment {
     Context context;
-    CardsViewModel cardsViewModel;
-    List<Card> cards;
+    Logger logger;
+    Card card;
 
     private boolean isFlipped = false;
     private TextView frontText, backText;
@@ -34,16 +35,10 @@ public class CardFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.context = requireActivity().getApplicationContext();
-        this.cardsViewModel = new CardsViewModel(this.context);
+        logger = Logger.getLogger(context.getPackageName());
     }
 
     private FragmentCardBinding binding;
-
-    private void getCards() {
-        cardsViewModel.getCards().observe(getViewLifecycleOwner(), cards -> {
-            this.cards = cards;
-        });
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,11 +50,15 @@ public class CardFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        this.getCards();
+        assert getArguments() != null;
+        this.card = (Card) getArguments().getSerializable("card");
 
         cardView = view.findViewById(R.id.cardView);
         frontText = view.findViewById(R.id.cardFrontText);
         backText = view.findViewById(R.id.cardBackText);
+
+        frontText.setText(this.card.getQuestion());
+        backText.setText(this.card.getAnswer());
 
         // Flip the card when clicked
         cardView.setOnClickListener(v -> flipCard());
@@ -67,16 +66,21 @@ public class CardFragment extends Fragment {
 
     private void flipCard() {
         isFlipped = !isFlipped;
-        float rotationY = isFlipped ? 180f : 0f;
-        cardView.animate().rotationY(rotationY).setDuration(300).withEndAction(() -> {
-            if (isFlipped) {
+        if (isFlipped) {
+            cardView.animate().rotationY(90f).setDuration(150).withEndAction(() -> {
                 frontText.setVisibility(View.GONE);
                 backText.setVisibility(View.VISIBLE);
-            } else {
-                frontText.setVisibility(View.VISIBLE);
+                cardView.setRotationY(-90f);
+                cardView.animate().rotationY(0f).setDuration(150).start();
+            }).start();
+        } else {
+            cardView.animate().rotationY(90f).setDuration(150).withEndAction(() -> {
                 backText.setVisibility(View.GONE);
-            }
-        }).start();
+                frontText.setVisibility(View.VISIBLE);
+                cardView.setRotationY(-90f);
+                cardView.animate().rotationY(0f).setDuration(150).start();
+            }).start();
+        }
     }
 
     @Override
