@@ -25,4 +25,8 @@ public class LocalRepository {
     public ArrayList<CardBox> getCardBoxes() {
         return this.dataSource.readCardBoxes();
     };
+
+    public boolean deleteCard(int cardId) {
+        return this.dataSource.deleteCard(cardId);
+    };
 }

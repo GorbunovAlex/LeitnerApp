@@ -42,4 +42,15 @@ public class CardsViewModel extends ViewModel {
             this.repository.writeCards(currentList);
         }
     }
+
+    public boolean deleteCard(int cardId) {
+        ArrayList<Card> currentList = this.cardList.getValue();
+        if (currentList != null) {
+            currentList.removeIf(card -> card.getId() == cardId);
+            this.cardList.setValue(currentList);
+            this.repository.writeCards(currentList);
+            return true;
+        }
+        return false;
+    }
 }

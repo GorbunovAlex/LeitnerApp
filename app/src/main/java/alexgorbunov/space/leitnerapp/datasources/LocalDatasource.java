@@ -65,4 +65,8 @@ public class LocalDatasource {
         ArrayList<CardBox> cardBoxes;
         return new ArrayList<>();
     }
+
+    public boolean deleteCard(int cardId) {
+        return false;
+    }
 }

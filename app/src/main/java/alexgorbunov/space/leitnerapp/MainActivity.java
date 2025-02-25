@@ -10,6 +10,7 @@ import android.view.View;
 
 
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -78,6 +79,16 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        NavHostFragment hostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
+        assert hostFragment != null;
+        NavController navController = hostFragment.getNavController();
+        NavDestination currentDestination = navController.getCurrentDestination();
+        if (currentDestination != null) {
+            if (currentDestination.getId() != R.id.CardFragment) {
+                menu.findItem(R.id.edit_card).setVisible(false);
+                menu.findItem(R.id.delete_card).setVisible(false);
+            }
+        }
         return true;
     }
 

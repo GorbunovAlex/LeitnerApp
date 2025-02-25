@@ -1,31 +1,31 @@
 package alexgorbunov.space.leitnerapp.view;
 
 import alexgorbunov.space.leitnerapp.R;
+import alexgorbunov.space.leitnerapp.view_model.CardsViewModel;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import alexgorbunov.space.leitnerapp.databinding.FragmentCardBinding;
 import alexgorbunov.space.leitnerapp.models.Card;
-import alexgorbunov.space.leitnerapp.view_model.CardsViewModel;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class CardFragment extends Fragment {
     Context context;
     Logger logger;
     Card card;
+    CardsViewModel cardsViewModel;
 
     private boolean isFlipped = false;
     private TextView frontText, backText;
@@ -34,6 +34,9 @@ public class CardFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.cardsViewModel = new ViewModelProvider(this).get(CardsViewModel.class);
+
+        setHasOptionsMenu(true);
         this.context = requireActivity().getApplicationContext();
         logger = Logger.getLogger(context.getPackageName());
     }
@@ -45,6 +48,32 @@ public class CardFragment extends Fragment {
 
         binding = FragmentCardBinding.inflate(inflater, container, false);
         return binding.getRoot();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.findItem(R.id.action_settings).setVisible(false);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.edit_card) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("card", card);
+            navController.navigate(R.id.FirstFragment, bundle);
+            return true;
+        } else if (id == R.id.delete_card) {
+            this.cardsViewModel.deleteCard(card.getId());
+            navController.navigateUp();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
