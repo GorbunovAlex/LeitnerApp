@@ -55,6 +55,19 @@ public class CardsFragment extends Fragment {
         return binding.getRoot();
     }
 
+    private void getCards() {
+        cardsViewModel.getCardList().observe(getViewLifecycleOwner(), new Observer<ArrayList<Card>>() {
+            @Override
+            public void onChanged(ArrayList<Card> cards) {
+                currentCards = cards;
+                logger.info(Integer.toString(cards.size()));
+                List<String> questions = cards.stream().map(Card::getQuestion).collect(Collectors.toList());
+                ArrayAdapter<String> arr = new ArrayAdapter<>(context, R.layout.card_list_item, questions);
+                cardsList.setAdapter(arr);
+            }
+        });
+    }
+
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -69,16 +82,7 @@ public class CardsFragment extends Fragment {
                     .navigate(R.id.action_CardsFragment_to_CardFragment, bundle);
         });
 
-        cardsViewModel.getCardList().observe(getViewLifecycleOwner(), new Observer<ArrayList<Card>>() {
-            @Override
-            public void onChanged(ArrayList<Card> cards) {
-                currentCards = cards;
-                logger.info(Integer.toString(cards.size()));
-                List<String> questions = cards.stream().map(Card::getQuestion).collect(Collectors.toList());
-                ArrayAdapter<String> arr = new ArrayAdapter<>(context, R.layout.card_list_item, questions);
-                cardsList.setAdapter(arr);
-            }
-        });
+        getCards();
     }
 
     @Override

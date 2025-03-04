@@ -69,7 +69,7 @@ public class CardFragment extends Fragment {
             return true;
         } else if (id == R.id.delete_card) {
             this.cardsViewModel.deleteCard(card.getId());
-            navController.navigateUp();
+            navController.navigate(R.id.CardsFragment);
             return true;
         }
 
