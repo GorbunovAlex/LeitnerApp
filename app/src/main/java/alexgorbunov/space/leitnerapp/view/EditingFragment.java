@@ -13,7 +13,7 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import alexgorbunov.space.leitnerapp.databinding.FragmentFirstBinding;
+import alexgorbunov.space.leitnerapp.databinding.FragmentEditingBinding;
 import alexgorbunov.space.leitnerapp.models.Card;
 import alexgorbunov.space.leitnerapp.view_model.CardsViewModel;
 import androidx.lifecycle.ViewModelProvider;
@@ -22,7 +22,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class FirstFragment extends Fragment {
+public class EditingFragment extends Fragment {
     Context context;
     CardsViewModel cardsViewModel;
 
@@ -33,7 +33,7 @@ public class FirstFragment extends Fragment {
         this.cardsViewModel = new ViewModelProvider(this).get(CardsViewModel.class);
     }
 
-    private FragmentFirstBinding binding;
+    private FragmentEditingBinding binding;
 
     @Override
     public View onCreateView(
@@ -41,7 +41,7 @@ public class FirstFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentFirstBinding.inflate(inflater, container, false);
+        binding = FragmentEditingBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 

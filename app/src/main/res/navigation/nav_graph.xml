@@ -19,9 +19,9 @@
 
     <fragment
             android:id="@+id/FirstFragment"
-            android:name="alexgorbunov.space.leitnerapp.view.FirstFragment"
+            android:name="alexgorbunov.space.leitnerapp.view.EditingFragment"
             android:label="@string/add_card_view"
-            tools:layout="@layout/fragment_first" />
+            tools:layout="@layout/fragment_editing" />
     <fragment
             android:id="@+id/CardFragment"
             android:name="alexgorbunov.space.leitnerapp.view.CardFragment"
