@@ -24,35 +24,23 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
     Context context;
+    ExecutorService executorService;
 
     private AppBarConfiguration appBarConfiguration;
-
-    private void initAppStorage() {
-        try {
-            File cards_storage = new File(context.getFilesDir(), Consts.CARDS_STORE);
-            if (!cards_storage.exists()) {
-                boolean isCreated = cards_storage.createNewFile();
-                if (!isCreated) {
-                    throw new RuntimeException("Can't create cards storage");
-                } else {
-                    Log.i(Consts.MAIN_ACTIVITY_TAG, "Cards storage created");
-                }
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         this.context = getApplicationContext();
+        this.executorService = Executors.newFixedThreadPool(4);
 
         alexgorbunov.space.leitnerapp.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -64,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = hostFragment.getNavController();
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-        initAppStorage();
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override

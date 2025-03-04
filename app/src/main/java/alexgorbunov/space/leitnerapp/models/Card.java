@@ -2,6 +2,9 @@ package alexgorbunov.space.leitnerapp.models;
 
 import android.util.Log;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -15,10 +18,15 @@ import java.util.stream.Collectors;
 
 import alexgorbunov.space.leitnerapp.Consts;
 
+@Entity(tableName = "cards")
 public class Card implements Serializable {
+    @PrimaryKey
     private final int id;
+    @ColumnInfo(name = "question")
     private final String question;
+    @ColumnInfo(name = "answer")
     private final String answer;
+    @ColumnInfo(name = "card_box_id", defaultValue = "1")
     private int cardBoxId;
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
@@ -34,7 +42,7 @@ public class Card implements Serializable {
         this.cardBoxId = cardBoxId;
     }
 
-    public int getCardBox() {
+    public int getCardBoxId() {
         return cardBoxId;
     }
 

@@ -69,7 +69,7 @@ public class CardsFragment extends Fragment {
                     .navigate(R.id.action_CardsFragment_to_CardFragment, bundle);
         });
 
-        cardsViewModel.getCards().observe(getViewLifecycleOwner(), new Observer<ArrayList<Card>>() {
+        cardsViewModel.getCardList().observe(getViewLifecycleOwner(), new Observer<ArrayList<Card>>() {
             @Override
             public void onChanged(ArrayList<Card> cards) {
                 currentCards = cards;
