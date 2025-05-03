@@ -3,16 +3,17 @@ import org.gradle.internal.impldep.com.fasterxml.jackson.core.JsonPointer.compil
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.dagger.hilt.android")
+    id("com.google.gms.google-services")
 }
 
 android {
     namespace = "alexgorbunov.space.leitnerapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "alexgorbunov.space.leitnerapp"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -62,4 +63,6 @@ dependencies {
     implementation(libs.jackson.databind)
 
     implementation(libs.datastore.preferences)
+    implementation(platform(libs.google.firebase.bom))
+    implementation(libs.firebase.analytics)
 }

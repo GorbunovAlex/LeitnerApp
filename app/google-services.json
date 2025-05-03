@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "365320413088",
+    "project_id": "leitnerapp-9a986",
+    "storage_bucket": "leitnerapp-9a986.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:365320413088:android:d655de57a4ce39fdb10ec5",
+        "android_client_info": {
+          "package_name": "alexgorbunov.space.leitnerapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDziTB9jtOw9lbPbDdIpSp4cyaRpObcaA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

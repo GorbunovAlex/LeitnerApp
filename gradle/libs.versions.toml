@@ -1,6 +1,7 @@
 [versions]
-agp = "8.7.2"
+agp = "8.9.2"
 datastorePreferences = "1.1.1"
+firebaseBomVersion = "33.13.0"
 hiltAndroid = "2.51.1"
 hiltAndroidCompiler = "2.51.1"
 jacksonCore = "2.6.3"
@@ -19,6 +20,8 @@ roomCompiler = "2.6.1"
 
 [libraries]
 datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+google-firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBomVersion" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-android-compiler-v244 = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidCompiler" }
 jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations", version.ref = "jacksonCore" }

@@ -16,4 +16,7 @@
     <string name="todo">TODO</string>
     <string name="delete_card">Delete Card</string>
     <string name="edit_card">Edit card</string>
+    <string name="action_light_mode">Light</string>
+    <string name="action_dark_mode">Dark</string>
+    <string name="no_data">No cards added</string>
 </resources>

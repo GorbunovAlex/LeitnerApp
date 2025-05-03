@@ -1,14 +1,16 @@
 package alexgorbunov.space.leitnerapp;
 
+import android.app.UiModeManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.util.Log;
+import android.content.res.Configuration;
 import android.view.View;
 
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
@@ -22,8 +24,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import dagger.hilt.android.AndroidEntryPoint;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -34,6 +34,18 @@ public class MainActivity extends AppCompatActivity {
     ExecutorService executorService;
 
     private AppBarConfiguration appBarConfiguration;
+
+    void setThemeMode(int mode) {
+        boolean isDarkMode = mode == R.id.dark_mode;
+        SharedPreferences preferences = getSharedPreferences("settings", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("dark_mode", isDarkMode);
+        editor.apply();
+
+        AppCompatDelegate.setDefaultNightMode(isDarkMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+
+        invalidateOptionsMenu();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +71,10 @@ public class MainActivity extends AppCompatActivity {
                 navController.navigate(R.id.FirstFragment);
             }
         });
+
+        SharedPreferences preferences = getSharedPreferences("settings", MODE_PRIVATE);
+        boolean isDarkMode = preferences.getBoolean("dark_mode", false);
+        setThemeMode(isDarkMode ? R.id.dark_mode : R.id.light_mode);
     }
 
     @Override
@@ -69,6 +85,18 @@ public class MainActivity extends AppCompatActivity {
         assert hostFragment != null;
         NavController navController = hostFragment.getNavController();
         NavDestination currentDestination = navController.getCurrentDestination();
+
+        SharedPreferences preferences = getSharedPreferences("settings", MODE_PRIVATE);
+        boolean isDarkMode = preferences.getBoolean("dark_mode", false);
+        if (isDarkMode) {
+            menu.findItem(R.id.dark_mode).setVisible(false);
+            menu.findItem(R.id.light_mode).setVisible(true);
+        } else {
+            menu.findItem(R.id.dark_mode).setVisible(true);
+            menu.findItem(R.id.light_mode).setVisible(false);
+        }
+
+
         if (currentDestination != null) {
             if (currentDestination.getId() != R.id.CardFragment) {
                 menu.findItem(R.id.edit_card).setVisible(false);
@@ -84,6 +112,11 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        AppCompatDelegate delegate = AppCompatDelegate.create(this, null);
+
+        if (id == R.id.dark_mode || id == R.id.light_mode) {
+            setThemeMode(id);
+        }
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
