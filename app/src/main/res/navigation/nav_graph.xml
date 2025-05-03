@@ -11,14 +11,14 @@
             tools:layout="@layout/fragment_cards">
         <action
                 android:id="@+id/action_CardsFragment_to_FirstFragment"
-                app:destination="@id/FirstFragment" />
+                app:destination="@id/EditingFragment" />
         <action
                 android:id="@+id/action_CardsFragment_to_CardFragment"
                 app:destination="@id/CardFragment" />
     </fragment>
 
     <fragment
-            android:id="@+id/FirstFragment"
+            android:id="@+id/EditingFragment"
             android:name="alexgorbunov.space.leitnerapp.view.EditingFragment"
             android:label="@string/add_card_view"
             tools:layout="@layout/fragment_editing" />

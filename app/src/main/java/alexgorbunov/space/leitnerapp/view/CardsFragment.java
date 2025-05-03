@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -52,6 +53,9 @@ public class CardsFragment extends Fragment {
     ) {
 
         binding = FragmentCardsBinding.inflate(inflater, container, false);
+        ListView list = (ListView) binding.getRoot().findViewById(R.id.cards_list);
+        TextView emptyText = (TextView) binding.getRoot().findViewById(R.id.emptyElement);
+        list.setEmptyView(emptyText);
         return binding.getRoot();
     }
 

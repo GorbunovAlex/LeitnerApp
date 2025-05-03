@@ -65,7 +65,7 @@ public class CardFragment extends Fragment {
         if (id == R.id.edit_card) {
             Bundle bundle = new Bundle();
             bundle.putSerializable("card", card);
-            navController.navigate(R.id.FirstFragment, bundle);
+            navController.navigate(R.id.EditingFragment, bundle);
             return true;
         } else if (id == R.id.delete_card) {
             this.cardsViewModel.deleteCard(card.getId());

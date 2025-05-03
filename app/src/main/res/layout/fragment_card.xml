@@ -5,8 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.CardFragment"
-        android:background="@color/md_theme_light_background">
+        tools:context=".view.CardFragment">
 
         <!-- Flippable Card -->
         <androidx.cardview.widget.CardView
@@ -35,8 +34,9 @@
                                 android:layout_height="match_parent"
                                 android:gravity="center"
                                 android:text="Front Text"
+                                android:textColor="?attr/colorOnPrimary"
                                 android:textAppearance="?android:attr/textAppearanceLarge"
-                                android:background="@color/md_theme_light_primaryContainer"/>
+                                android:background="?attr/colorPrimary"/>
 
                         <!-- Back Side of Card (Initially Hidden) -->
                         <TextView
@@ -45,8 +45,9 @@
                                 android:layout_height="match_parent"
                                 android:gravity="center"
                                 android:text="Back Text"
+                                android:textColor="?attr/colorOnPrimary"
                                 android:textAppearance="?android:attr/textAppearanceLarge"
-                                android:background="@color/md_theme_light_secondaryContainer"
+                                android:background="?attr/colorPrimary"
                                 android:visibility="gone"/>
                 </FrameLayout>
         </androidx.cardview.widget.CardView>

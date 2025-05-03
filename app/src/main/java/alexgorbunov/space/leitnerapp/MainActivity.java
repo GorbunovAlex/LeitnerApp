@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.FirstFragment);
+                navController.navigate(R.id.EditingFragment);
             }
         });
 

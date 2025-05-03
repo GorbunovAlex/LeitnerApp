@@ -78,6 +78,28 @@ public class CardsRepository {
     }
 
     @SuppressLint("CheckResult")
+    public void addCard(Card card, final RepositoryCallback<Boolean> callback) {
+        cardDao.insert(card)
+                .subscribeOn(Schedulers.io())
+                .subscribe(() -> {
+                    callback.onComplete(true);
+                }, throwable -> {
+                    callback.onComplete(false);
+                });
+    }
+
+    @SuppressLint("CheckResult")
+    public void updateCard(Card card, final RepositoryCallback<Boolean> callback) {
+        cardDao.update(card)
+                .subscribeOn(Schedulers.io())
+                .subscribe(() -> {
+                    callback.onComplete(true);
+                }, throwable -> {
+                    callback.onComplete(false);
+                });
+    }
+
+    @SuppressLint("CheckResult")
     public void deleteCard(int cardId, final RepositoryCallback<Boolean> callback) {
         cardDao.getById(cardId)
                 .flatMapCompletable(cardDao::delete)

@@ -13,6 +13,9 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 import alexgorbunov.space.leitnerapp.models.Card;
 import dagger.hilt.android.lifecycle.HiltViewModel;
@@ -23,11 +26,13 @@ import javax.inject.Inject;
 public class CardsViewModel extends ViewModel {
     private final CardsRepository repository;
     private final MutableLiveData<ArrayList<Card>> cardList = new MutableLiveData<>();
+    private Logger logger;
 
     @Inject
     public CardsViewModel(Context context) {
         this.repository = new CardsRepository(context);
         this.getCardsFromDatabase();
+        logger = Logger.getLogger(context.getPackageName());
     }
 
     public void getCardsFromDatabase() {
@@ -54,12 +59,35 @@ public class CardsViewModel extends ViewModel {
         if (currentList != null) {
             currentList.add(card);
             this.cardList.setValue(currentList);
-            this.repository.writeCards(currentList, new RepositoryCallback<Boolean>() {
+            this.repository.addCard(card, new RepositoryCallback<Boolean>() {
                 @Override
                 public void onComplete(Boolean result) {
                     if (!result) {
                         currentList.remove(card);
                         cardList.setValue(currentList);
+                    }
+                }
+            });
+        }
+    }
+
+    public void updateCard(Card card) {
+        ArrayList<Card> currentList = this.cardList.getValue();
+        if (currentList != null) {
+            for (int i = 0; i < currentList.size(); i++) {
+                if (currentList.get(i).getId() == card.getId()) {
+                    currentList.set(i, card);
+                    break;
+                }
+            }
+            this.cardList.setValue(currentList);
+            this.repository.updateCard(card, new RepositoryCallback<Boolean>() {
+                @Override
+                public void onComplete(Boolean result) {
+                    if (result) {
+                        getCardsFromDatabase();
+                    } else {
+                        logger.log(new LogRecord(Level.WARNING, "Failed to update card"));
                     }
                 }
             });
