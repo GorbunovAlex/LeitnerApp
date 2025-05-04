@@ -66,18 +66,6 @@ public class CardsRepository {
     }
 
     @SuppressLint("CheckResult")
-    public void writeCards(ArrayList<Card> cards, final RepositoryCallback<Boolean> callback) {
-        Object AndroidSchedulers;
-        cardDao.insertAll(cards)
-                .subscribeOn(Schedulers.io())
-                .subscribe(() -> {
-                    callback.onComplete(true);
-                }, throwable -> {
-                    callback.onComplete(false);
-                });
-    }
-
-    @SuppressLint("CheckResult")
     public void addCard(Card card, final RepositoryCallback<Boolean> callback) {
         cardDao.insert(card)
                 .subscribeOn(Schedulers.io())

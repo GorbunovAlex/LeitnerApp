@@ -1,5 +1,7 @@
 package alexgorbunov.space.leitnerapp;
 
+import static android.view.View.INVISIBLE;
+
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -22,8 +24,15 @@ import alexgorbunov.space.leitnerapp.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
+import com.google.android.material.bottomappbar.BottomAppBar;
+
 import dagger.hilt.android.AndroidEntryPoint;
 
+import java.time.Year;
+import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -65,46 +74,61 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navController.navigate(R.id.EditingFragment);
-            }
-        });
+//        binding.fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                navController.navigate(R.id.EditingFragment);
+//            }
+//        });
 
         SharedPreferences preferences = getSharedPreferences("settings", MODE_PRIVATE);
         boolean isDarkMode = preferences.getBoolean("dark_mode", false);
         setThemeMode(isDarkMode ? R.id.dark_mode : R.id.light_mode);
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        NavHostFragment hostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
-        assert hostFragment != null;
-        NavController navController = hostFragment.getNavController();
-        NavDestination currentDestination = navController.getCurrentDestination();
+        BottomAppBar bottomAppBar = findViewById(R.id.bottom_app_bar);
+//        bottomAppBar.findViewById(R.id.fab).setVisibility(INVISIBLE);
+        TextView bottomAppBarAuthor = bottomAppBar.findViewById(R.id.bottom_app_bar_author);
+        bottomAppBarAuthor.setText(String.format("Aleksandr Gorbunov | %s", Year.now()));
+        TextView bottomAppBarVersion = bottomAppBar.findViewById(R.id.bottom_app_bar_version);
+        bottomAppBarVersion.setText("v1.0.0");
 
-        SharedPreferences preferences = getSharedPreferences("settings", MODE_PRIVATE);
-        boolean isDarkMode = preferences.getBoolean("dark_mode", false);
-        if (isDarkMode) {
-            menu.findItem(R.id.dark_mode).setVisible(false);
-            menu.findItem(R.id.light_mode).setVisible(true);
-        } else {
-            menu.findItem(R.id.dark_mode).setVisible(true);
-            menu.findItem(R.id.light_mode).setVisible(false);
-        }
-
-
-        if (currentDestination != null) {
-            if (currentDestination.getId() != R.id.CardFragment) {
-                menu.findItem(R.id.edit_card).setVisible(false);
-                menu.findItem(R.id.delete_card).setVisible(false);
+        ImageButton settingsButton = findViewById(R.id.settings_button);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.action_starter_fragment_to_settings_fragment);
             }
-        }
-        return true;
+        });
     }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        NavHostFragment hostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
+//        assert hostFragment != null;
+//        NavController navController = hostFragment.getNavController();
+//        NavDestination currentDestination = navController.getCurrentDestination();
+//
+//        SharedPreferences preferences = getSharedPreferences("settings", MODE_PRIVATE);
+//        boolean isDarkMode = preferences.getBoolean("dark_mode", false);
+//        if (isDarkMode) {
+//            menu.findItem(R.id.dark_mode).setVisible(false);
+//            menu.findItem(R.id.light_mode).setVisible(true);
+//        } else {
+//            menu.findItem(R.id.dark_mode).setVisible(true);
+//            menu.findItem(R.id.light_mode).setVisible(false);
+//        }
+//
+//
+//        if (currentDestination != null) {
+//            if (currentDestination.getId() != R.id.CardFragment) {
+//                menu.findItem(R.id.edit_card).setVisible(false);
+//                menu.findItem(R.id.delete_card).setVisible(false);
+//            }
+//        }
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

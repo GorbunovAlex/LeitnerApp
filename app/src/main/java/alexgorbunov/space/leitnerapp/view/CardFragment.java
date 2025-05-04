@@ -51,17 +51,10 @@ public class CardFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        menu.findItem(R.id.action_settings).setVisible(false);
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
-        //noinspection SimplifiableIfStatement
         if (id == R.id.edit_card) {
             Bundle bundle = new Bundle();
             bundle.putSerializable("card", card);
@@ -89,26 +82,45 @@ public class CardFragment extends Fragment {
         frontText.setText(this.card.getQuestion());
         backText.setText(this.card.getAnswer());
 
-        // Flip the card when clicked
         cardView.setOnClickListener(v -> flipCard());
     }
 
     private void flipCard() {
         isFlipped = !isFlipped;
+
+        final int DURATION = 200;
+        final float SCALE_DOWN = 0.8f;
+
         if (isFlipped) {
-            cardView.animate().rotationY(90f).setDuration(150).withEndAction(() -> {
-                frontText.setVisibility(View.GONE);
-                backText.setVisibility(View.VISIBLE);
-                cardView.setRotationY(-90f);
-                cardView.animate().rotationY(0f).setDuration(150).start();
-            }).start();
+            cardView.animate()
+                    .scaleX(SCALE_DOWN)
+                    .scaleY(SCALE_DOWN)
+                    .setDuration(DURATION / 2)
+                    .withEndAction(() -> {
+                        frontText.setVisibility(View.GONE);
+                        backText.setVisibility(View.VISIBLE);
+
+                        cardView.animate()
+                                .scaleX(1f)
+                                .scaleY(1f)
+                                .setDuration(DURATION / 2)
+                                .start();
+                    }).start();
         } else {
-            cardView.animate().rotationY(90f).setDuration(150).withEndAction(() -> {
-                backText.setVisibility(View.GONE);
-                frontText.setVisibility(View.VISIBLE);
-                cardView.setRotationY(-90f);
-                cardView.animate().rotationY(0f).setDuration(150).start();
-            }).start();
+            cardView.animate()
+                    .scaleX(SCALE_DOWN)
+                    .scaleY(SCALE_DOWN)
+                    .setDuration(DURATION / 2)
+                    .withEndAction(() -> {
+                        backText.setVisibility(View.GONE);
+                        frontText.setVisibility(View.VISIBLE);
+
+                        cardView.animate()
+                                .scaleX(1f)
+                                .scaleY(1f)
+                                .setDuration(DURATION / 2)
+                                .start();
+                    }).start();
         }
     }
 

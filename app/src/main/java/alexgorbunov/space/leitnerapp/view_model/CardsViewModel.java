@@ -26,7 +26,7 @@ import javax.inject.Inject;
 public class CardsViewModel extends ViewModel {
     private final CardsRepository repository;
     private final MutableLiveData<ArrayList<Card>> cardList = new MutableLiveData<>();
-    private Logger logger;
+    private final Logger logger;
 
     @Inject
     public CardsViewModel(Context context) {
