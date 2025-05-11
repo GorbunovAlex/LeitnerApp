@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/nav_graph"
+        app:startDestination="@id/starter_fragment">
+    <fragment
+            android:id="@+id/starter_fragment"
+            android:name="alexgorbunov.space.leitnerapp.view.StarterFragment"
+            android:label="@string/app_name"
+            tools:layout="@layout/starter_fragment"
+        >
+        <action
+                android:id="@+id/action_starter_fragment_to_CardsFragment"
+                app:destination="@id/CardsFragment" />
+        <action
+                android:id="@+id/action_starter_fragment_to_settings_fragment"
+                app:destination="@id/settings_fragment" />
+    </fragment>
+    <fragment android:id="@+id/settings_fragment"
+            android:name="alexgorbunov.space.leitnerapp.view.SettingsFragment"
+            android:label="Settings"
+            tools:layout="@layout/settings_fragment" />
+    <fragment
+            android:id="@+id/CardsFragment"
+            android:name="alexgorbunov.space.leitnerapp.view.CardsFragment"
+            android:label="@string/cards_list_view"
+            tools:layout="@layout/fragment_cards">
+        <action
+                android:id="@+id/action_CardsFragment_to_FirstFragment"
+                app:destination="@id/EditingFragment" />
+        <action
+                android:id="@+id/action_CardsFragment_to_CardFragment"
+                app:destination="@id/CardFragment" />
+    </fragment>
+
+    <fragment
+            android:id="@+id/EditingFragment"
+            android:name="alexgorbunov.space.leitnerapp.view.EditingFragment"
+            android:label="@string/add_card_view"
+            tools:layout="@layout/fragment_editing" />
+    <fragment
+            android:id="@+id/CardFragment"
+            android:name="alexgorbunov.space.leitnerapp.view.CardFragment"
+            android:label="@string/card_view"
+            tools:layout="@layout/fragment_card"/>
+</navigation>

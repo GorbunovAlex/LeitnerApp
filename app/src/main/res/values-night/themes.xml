@@ -1,0 +1,41 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.LeitnerApp" parent="Theme.Material3.DayNight.NoActionBar">
+      <!-- Primary Colors -->
+        <item name="colorPrimary">#B2C7FF</item>
+        <item name="colorOnPrimary">#002764</item>
+        <item name="colorPrimaryContainer">#003A99</item>
+        <item name="colorOnPrimaryContainer">#D5E0FF</item>
+
+        <!-- Secondary Colors -->
+        <item name="colorSecondary">#BBC7E8</item>
+        <item name="colorOnSecondary">#1D293F</item>
+        <item name="colorSecondaryContainer">#384766</item>
+        <item name="colorOnSecondaryContainer">#D9E2FF</item>
+
+        <!-- Tertiary Colors -->
+        <item name="colorTertiary">#D6BEE3</item>
+        <item name="colorOnTertiary">#3B223F</item>
+        <item name="colorTertiaryContainer">#573F5B</item>
+        <item name="colorOnTertiaryContainer">#F2DAFF</item>
+
+        <!-- Error Colors -->
+        <item name="colorError">#FFB4A9</item>
+        <item name="colorOnError">#680003</item>
+        <item name="colorErrorContainer">#930006</item>
+        <item name="colorOnErrorContainer">#FFDAD6</item>
+
+        <!-- Background & Surface -->
+        <item name="android:colorBackground">#121212</item>
+        <item name="colorOnBackground">#E0E0E0</item>
+        <item name="colorSurface">#1E1E1E</item>
+        <item name="colorOnSurface">#F2F2F2</item>
+
+        <!-- Outline -->
+        <item name="colorOutline">#8E8E8E</item>
+
+        <!-- Status Bar & Navigation Bar -->
+        <item name="android:statusBarColor">#002764</item>
+        <item name="android:navigationBarColor">#121212</item>
+    </style>
+</resources>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Primary Colors -->
+    <color name="md_theme_light_primary">#0B327A</color>
+    <color name="md_theme_light_onPrimary">#FFFFFF</color>
+    <color name="md_theme_light_primaryContainer">#D5E0FF</color>
+    <color name="md_theme_light_onPrimaryContainer">#00174B</color>
+
+    <!-- Secondary Colors -->
+    <color name="md_theme_light_secondary">#546184</color>
+    <color name="md_theme_light_onSecondary">#FFFFFF</color>
+    <color name="md_theme_light_secondaryContainer">#D9E2FF</color>
+    <color name="md_theme_light_onSecondaryContainer">#101C37</color>
+
+    <!-- Tertiary Colors -->
+    <color name="md_theme_light_tertiary">#735574</color>
+    <color name="md_theme_light_onTertiary">#FFFFFF</color>
+    <color name="md_theme_light_tertiaryContainer">#F2DAFF</color>
+    <color name="md_theme_light_onTertiaryContainer">#2B122F</color>
+
+    <!-- Error Colors -->
+    <color name="md_theme_light_error">#BA1A1A</color>
+    <color name="md_theme_light_onError">#FFFFFF</color>
+    <color name="md_theme_light_errorContainer">#FFDAD6</color>
+    <color name="md_theme_light_onErrorContainer">#410002</color>
+
+    <!-- Background & Surface -->
+    <color name="md_theme_light_background">#FDFDFD</color>
+    <color name="md_theme_light_onBackground">#191C20</color>
+    <color name="md_theme_light_surface">#FFFFFF</color>
+    <color name="md_theme_light_onSurface">#191C20</color>
+
+    <!-- Outline -->
+    <color name="md_theme_light_outline">#73777F</color>
+
+</resources>

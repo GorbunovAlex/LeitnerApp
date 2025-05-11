@@ -1,0 +1,32 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="alexgorbunov.space.leitnerapp.MainActivity">
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+    <item
+            android:id="@+id/light_mode"
+            android:orderInCategory="200"
+            android:title="@string/action_light_mode"
+            app:showAsAction="never" />
+    <item
+            android:id="@+id/dark_mode"
+            android:orderInCategory="300"
+            android:title="@string/action_dark_mode"
+            app:showAsAction="never" />
+    <item
+            android:id="@+id/edit_card"
+            android:orderInCategory="400"
+            android:title="@string/edit_card"
+            app:showAsAction="never"
+    />
+    <item
+            android:id="@+id/delete_card"
+            android:orderInCategory="500"
+            android:title="@string/delete_card"
+            app:showAsAction="never"
+    />
+</menu>
